@@ -12,8 +12,7 @@ using namespace std;
 int main()																			//changed void to int to run module properly
 {
 	//char statement[100]{}; removed variable because it's not needed
-	double op1;																		//split up these two lines because op2 was not able to be initialized on
-	double op2;																		//the same line as op1. also changed type to double for added accuracy
+	double op1, op2;																//changed type to double for added accuracy
 	char operation; 
 	char answer;																	//added semicolon to finish line and removed char assignment
 
