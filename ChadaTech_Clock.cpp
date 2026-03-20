@@ -4,18 +4,24 @@
 
 using namespace std;
 
-//int MilitaryHour(double hour) {
-	//if (hour > 12) {
-		//hour = hour - 12;
-	//}
-//}
+int MilitaryHour(double hour) {
+	double tempHour = 00;
+	double militaryHour = 00;
+	
+	if (hour > 12) {
+		tempHour = hour;
+		militaryHour = hour;
+		hour = militaryHour - 12;
+	}
+	return hour;
+}
 
-void CurrentTime(double hour, double minutes, double seconds, double militaryHour) {
+void CurrentTime(double hour, double minutes, double seconds) {
 	cout << "*************************" << "   " << "*************************" << endl;
 	cout << "*     " << "12-Hour Clock" << setw(6) << "*" << "   " << "*     " << "24-Hour Clock" << setw(6) << "*" << endl;
-	cout << "*        " << setw(2) << setfill('0') << hour << ":" << setw(2) << setfill('0') << minutes << ":";
+	cout << "*        " << setw(2) << setfill('0') << MilitaryHour(hour) << ":" << setw(2) << setfill('0') << minutes << ":";
 	cout << setw(2) << setfill('0') << seconds << "       *" << "   ";
-	cout << "*        " << setw(2) << setfill('0') << militaryHour << ":" << setw(2) << setfill('0') << minutes << ":";
+	cout << "*        " << setw(2) << setfill('0') << hour << ":" << setw(2) << setfill('0') << minutes << ":";
 	cout << setw(2) << setfill('0') << seconds << "       *" << setfill(' ') << endl;
 	cout << "*************************" << "   " << "*************************" << endl;
 }
@@ -35,8 +41,6 @@ int main() {
 	double hour;
 	double minutes;
 	double seconds;
-	double militaryHour = 00;
-	double tempHour = 00;
 	int selection = 4;
 
 	cout << "Please enter the current time in hours, minutes, and seconds: " << endl;
@@ -45,7 +49,7 @@ int main() {
 	cin >> minutes;
 	cin >> seconds;
 
-	CurrentTime(hour, minutes, seconds, militaryHour);
+	CurrentTime(hour, minutes, seconds);
 	
 	while (selection != 5) {
 		if (selection == 4) {
@@ -62,12 +66,8 @@ int main() {
 
 		else if (selection == 1) {
 			hour = hour + 1;
-			if (hour > 12) {
-				tempHour = hour;
-				militaryHour = hour;
-				hour = militaryHour - 12;
-			}
-			CurrentTime(hour, minutes, seconds, militaryHour);
+			MilitaryHour(hour);
+			CurrentTime(hour, minutes, seconds);
 			cout << "Please select 1 - 5 from the menu: " << endl;
 
 			cin >> selection;
@@ -75,7 +75,8 @@ int main() {
 
 		else if (selection == 2) {
 			minutes = minutes + 1;
-			CurrentTime(hour, minutes, seconds, militaryHour);
+			MilitaryHour(hour);
+			CurrentTime(hour, minutes, seconds);
 			cout << "Please select 1 - 5 from the menu: " << endl;
 
 			cin >> selection;
@@ -83,7 +84,7 @@ int main() {
 
 		else if (selection == 3) {
 			seconds = seconds + 1;
-			CurrentTime(hour, minutes, seconds, militaryHour);
+			CurrentTime(hour, minutes, seconds);
 			cout << "Please select 1 - 5 from the menu: " << endl;
 
 			cin >> selection;
