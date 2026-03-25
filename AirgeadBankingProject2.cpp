@@ -8,8 +8,7 @@ void Test() {
 	cout << "Test block" << endl;
 }
 
-void WelcomeScreen() { //sets up the welcome screen
-	int selection;
+void WelcomeScreen(int& selection) { //sets up the welcome screen
 
 	cout << setfill('*') << setw(34) << "" << endl;
 	cout << setfill('*') << setw(12) << "" << " Welcome! " << setw(12) << "" << endl;
@@ -19,13 +18,19 @@ void WelcomeScreen() { //sets up the welcome screen
 	cin >> selection;
 }
 
+void DataInput() {
+	cout << setfill('*') << setw(34) << "" << endl;
+	cout << setfill('*') << setw(10) << "" << " Data Input " << setw(10) << "" << endl;
+}
+
 int main() {
 	int selection = 0;
 
-	WelcomeScreen();
+	WelcomeScreen(selection);
 
 	while (selection == 1) {
 		Test();
+		DataInput();
 		break;
 	}
 
