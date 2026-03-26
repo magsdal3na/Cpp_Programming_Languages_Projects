@@ -49,11 +49,16 @@ void DataInput() {
 
 	cout << setfill('*') << setw(34) << "" << endl;
 	cout << setfill('*') << setw(11) << "" << " Data Input " << setw(11) << "" << endl;
-	cout << setfill(' ') << setw(31) << left << "Initial Investment Amount:  " << "$" << investment << endl;
-	cout << setw(31) << left << "Monthly Deposit:  " << "$" << monthlyDeposit << endl;
-	cout << setw(31) << left << "Annual Interest:  " << annualInterest << "%" << endl;
-	cout << setw(31) << left << "Number of Years:  " << numOfYears << endl;
+	cout << setfill(' ') << "Initial Investment Amount:  " << "$" << investment << endl;
+	cout << "Monthly Deposit:  " << "$" << monthlyDeposit << endl;
+	cout << "Annual Interest:  " << annualInterest << "%" << endl;
+	cout << "Number of Years:  " << numOfYears << endl;
 	cout << setw(34) << left << "Press 1 to continue. . ." << endl;
+}
+
+void BalanceScreenWithout() {
+	cout << setfill(' ') << setw(4) << "" << "Balance and Interest Without Additional Monthly Deposits" << setw(5) << "" << endl;
+	cout << setfill('=') << setw(65) << "" << endl;
 }
 
 int main() {
@@ -63,7 +68,8 @@ int main() {
 
 	while (selection == 1) {
 		DataInputScreen();
-		DataInput();
+		//DataInput();
+		BalanceScreenWithout();
 		break;
 	}
 
