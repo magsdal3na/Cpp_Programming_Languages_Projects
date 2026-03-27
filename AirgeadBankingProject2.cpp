@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <vector> //might not be needed
+#include <vector>
 
 using namespace std;
 
@@ -28,11 +28,8 @@ void DataInputScreen() { //setting up basic data input screen for user
 	cout << setw(34) << left << "Press 1 to continue. . ." << endl;
 }
 
-void DataInput() {
-	double investment;
-	double monthlyDeposit;
-	double annualInterest;
-	int numOfYears;
+//outputs user input requests for the data screen
+void DataInput(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
 
 	cout << "Please enter the starting amount of your investment: " << endl;
 	cout << ">>";
@@ -47,6 +44,7 @@ void DataInput() {
 	cout << ">>";
 	cin >> numOfYears;
 
+	//outputs user inputs
 	cout << setfill('*') << setw(34) << "" << endl;
 	cout << setfill('*') << setw(11) << "" << " Data Input " << setw(11) << "" << endl;
 	cout << setfill(' ') << "Initial Investment Amount:  " << "$" << investment << endl;
@@ -56,20 +54,39 @@ void DataInput() {
 	cout << setw(34) << left << "Press 1 to continue. . ." << endl;
 }
 
-void BalanceScreenWithout() {
+//outputs balance screen without additional monthly deposits
+void BalanceScreenWithout(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
+	vector<double> yearsVec(numOfYears);
+	unsigned int i;
+
+	for (i = 1; i < yearsVec.size(); ++i) {
+		yearsVec.at(i);
+	}
+	
 	cout << setfill(' ') << setw(4) << "" << "Balance and Interest Without Additional Monthly Deposits" << setw(5) << "" << endl;
 	cout << setfill('=') << setw(65) << "" << endl;
+	cout << setfill(' ') << setw(2) << "" << "Year" << "      " << "Year End Balance" << "          " << "Year End Earned Interest" << setw(5) << "" << endl;
+	cout << setfill('-') << setw(65) << "" << endl;
+	cout << setfill(' ') << setw(2) << "" << yearsVec.at(0) << "      " << endl;
+	cout << setfill(' ') << setw(2) << "" << yearsVec.at(1) << "      " << endl;
+	cout << monthlyDeposit << endl;
+	cout << annualInterest << endl;
+	cout << numOfYears << endl;
 }
 
 int main() {
 	int selection = 0;
+	double investment;
+	double monthlyDeposit;
+	double annualInterest;
+	int numOfYears;
 
 	WelcomeScreen(selection);
 
 	while (selection == 1) {
 		DataInputScreen();
-		//DataInput();
-		BalanceScreenWithout();
+		DataInput(investment, monthlyDeposit, annualInterest, numOfYears);
+		BalanceScreenWithout(investment, monthlyDeposit, annualInterest, numOfYears);
 		break;
 	}
 
