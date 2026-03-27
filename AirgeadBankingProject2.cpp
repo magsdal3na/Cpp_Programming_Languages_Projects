@@ -25,7 +25,6 @@ void DataInputScreen() { //setting up basic data input screen for user
 	cout << setw(34) << left << "Monthly Deposit: " << endl;
 	cout << setw(34) << left << "Annual Interest: " << endl;
 	cout << setw(34) << left << "Number of Years: " << endl;
-	cout << setw(34) << left << "Press 1 to continue. . ." << endl;
 }
 
 //outputs user input requests for the data screen
@@ -51,7 +50,6 @@ void DataInput(double& investment, double& monthlyDeposit, double& annualInteres
 	cout << "Monthly Deposit:  " << "$" << monthlyDeposit << endl;
 	cout << "Annual Interest:  " << annualInterest << "%" << endl;
 	cout << "Number of Years:  " << numOfYears << endl;
-	cout << setw(34) << left << "Press 1 to continue. . ." << endl;
 }
 
 //outputs balance screen without additional monthly deposits
@@ -60,14 +58,16 @@ void BalanceScreenWithout(double& investment, double& monthlyDeposit, double& an
 	double yearlyInterest;
 	
 	//print headers
+	cout << endl;
+	cout << setfill('=') << setw(65) << "" << endl;
 	cout << setfill(' ') << setw(4) << "" << "Balance and Interest Without Additional Monthly Deposits" << setw(5) << "" << endl;
 	cout << setfill('=') << setw(65) << "" << endl;
 	cout << setfill(' ') << setw(2) << "" << "Year" << "      " << "Year End Balance" << "          " << "Year End Earned Interest" << setw(5) << "" << endl;
 	cout << setfill('-') << setw(65) << "" << endl;
 
-	//iterate through each year
 	cout << fixed << setprecision(2); //for currency output
 
+	//iterate through each year
 	for (int i = 1; i <= numOfYears; ++i) {
 		yearlyInterest = currentBalance * (annualInterest / 100.0);
 		currentBalance = currentBalance + yearlyInterest;
@@ -76,6 +76,42 @@ void BalanceScreenWithout(double& investment, double& monthlyDeposit, double& an
 		cout << setfill(' ') << "  " << i
 			<< "         " << "$" << currentBalance
 			<< "                   " << "$" << yearlyInterest << endl;
+	}
+}
+
+//for outputting balance screen with monthly additions
+void BalanceScreenWith(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
+	double currentBalance = investment;
+	double monthlyInterestRate = (annualInterest / 100.0) / 12.0;
+
+	//print headers
+	cout << endl;
+	cout << setfill('=') << setw(65) << "" << endl;
+	cout << setfill(' ') << setw(4) << "" << "Balance and Interest With Additional Monthly Deposits" << setw(5) << "" << endl;
+	cout << setfill('=') << setw(65) << "" << endl;
+	cout << setfill(' ') << setw(2) << "" << "Year" << "      " << "Year End Balance" << "          " << "Year End Earned Interest" << setw(5) << "" << endl;
+	cout << setfill('-') << setw(65) << "" << endl;
+
+	cout << fixed << setprecision(2); //for currency output
+
+	//iterate through each year
+	for (int i = 1; i <= numOfYears; ++i) {
+		double yearlyInterestEarned = 0; //need to reset for each new year
+
+		for (int j = 1; j <= 12; ++j) {
+			//add monthly deposit
+			currentBalance += monthlyDeposit; 
+			//calculate interest for current month
+			double monthlyInterest = currentBalance * monthlyInterestRate; 
+			//add to running yearly total and whole balance
+			yearlyInterestEarned += monthlyInterest;
+			currentBalance += monthlyInterest;
+		}
+
+		//output after full year
+		cout << setfill(' ') << "  " << i
+			<< "         " << "$" << currentBalance
+			<< "                   " << "$" << yearlyInterestEarned << endl;
 	}
 }
 
@@ -92,6 +128,7 @@ int main() {
 		DataInputScreen();
 		DataInput(investment, monthlyDeposit, annualInterest, numOfYears);
 		BalanceScreenWithout(investment, monthlyDeposit, annualInterest, numOfYears);
+		BalanceScreenWith(investment, monthlyDeposit, annualInterest, numOfYears);
 		break;
 	}
 
