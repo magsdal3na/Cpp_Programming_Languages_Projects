@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <vector>
+#include <vector> //might not need
 
 using namespace std;
 
@@ -8,7 +8,7 @@ void Test() {
 	cout << "Test block" << endl;
 }
 
-void WelcomeScreen(int& selection) { //sets up the welcome screen
+void welcomeScreen(int& selection) { //sets up the welcome screen
 
 	cout << setfill('*') << setw(34) << "" << endl;
 	cout << setfill('*') << setw(12) << "" << " Welcome! " << setw(12) << "" << endl;
@@ -18,7 +18,7 @@ void WelcomeScreen(int& selection) { //sets up the welcome screen
 	cin >> selection;
 }
 
-void DataInputScreen() { //setting up basic data input screen for user
+void dataInputScreen() { //setting up basic data input screen for user
 	cout << setfill('*') << setw(34) << "" << endl;
 	cout << setfill('*') << setw(11) << "" << " Data Input " << setw(11) << "" << endl;
 	cout << setfill(' ') << setw(34) << left << "Initial Investment Amount: " << endl;
@@ -28,7 +28,7 @@ void DataInputScreen() { //setting up basic data input screen for user
 }
 
 //outputs user input requests for the data screen
-void DataInput(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
+void dataInput(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
 
 	cout << "Please enter the starting amount of your investment: " << endl;
 	cout << ">>";
@@ -53,7 +53,7 @@ void DataInput(double& investment, double& monthlyDeposit, double& annualInteres
 }
 
 //outputs balance screen without additional monthly deposits
-void BalanceScreenWithout(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
+void balanceScreenWithout(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
 	double currentBalance = investment;
 	double yearlyInterest;
 	
@@ -80,7 +80,7 @@ void BalanceScreenWithout(double& investment, double& monthlyDeposit, double& an
 }
 
 //for outputting balance screen with monthly additions
-void BalanceScreenWith(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
+void balanceScreenWith(double& investment, double& monthlyDeposit, double& annualInterest, int& numOfYears) {
 	double currentBalance = investment;
 	double monthlyInterestRate = (annualInterest / 100.0) / 12.0;
 
@@ -122,13 +122,13 @@ int main() {
 	double annualInterest;
 	int numOfYears;
 
-	WelcomeScreen(selection);
+	welcomeScreen(selection);
 
 	while (selection == 1) {
-		DataInputScreen();
-		DataInput(investment, monthlyDeposit, annualInterest, numOfYears);
-		BalanceScreenWithout(investment, monthlyDeposit, annualInterest, numOfYears);
-		BalanceScreenWith(investment, monthlyDeposit, annualInterest, numOfYears);
+		dataInputScreen();
+		dataInput(investment, monthlyDeposit, annualInterest, numOfYears);
+		balanceScreenWithout(investment, monthlyDeposit, annualInterest, numOfYears);
+		balanceScreenWith(investment, monthlyDeposit, annualInterest, numOfYears);
 		cout << endl;
 		cout << "Please enter 1 if you would like to continue: " << endl;
 		cout << ">>";
